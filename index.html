@@ -26,12 +26,12 @@
   "@type": "Organization",
   "name": "Burji Aloqa",
   "description": "Проектирование, строительство и обслуживание опор двойного назначения (ОДН) для операторов связи",
-  "url": "https://burjialoqa.uz",
+  "url": "https://burjialoqa.tj",
   "contactPoint": {
     "@type": "ContactPoint",
-    "telephone": "+998-71-200-00-00",
+    "telephone": "+992-37-200-00-00",
     "contactType": "customer service",
-    "availableLanguage": ["Russian", "Uzbek"]
+    "availableLanguage": ["Russian", "Tajik"]
   }
 }
 </script>
@@ -119,13 +119,26 @@ button,input,select,textarea{font-family:inherit}
 .actions{display:flex;align-items:center;gap:12px}
 .actions .btn{display:none}
 .menu{position:relative}
-.menu summary{list-style:none;cursor:pointer;width:52px;height:52px;border-radius:50%;background:var(--ink);color:var(--white);display:grid;place-items:center}
+.menu summary{list-style:none;cursor:pointer;width:52px;height:52px;border-radius:50%;background:var(--ink);color:var(--white);display:grid;place-items:center;position:relative;z-index:2}
 .menu summary::-webkit-details-marker{display:none}
-.menu summary span{display:block;width:18px;height:2px;background:currentColor;box-shadow:0 -6px 0 currentColor,0 6px 0 currentColor}
-.menu-panel{position:absolute;right:0;top:calc(100% + 12px);width:280px;background:var(--white);border:1px solid var(--pebble);border-radius:22px;padding:12px}
-.menu-panel a{display:flex;align-items:center;min-height:48px;padding:0 16px;font-size:20px;text-decoration:none;border-radius:1000px}
-.menu-panel a:hover{background:#f1f1f3}
-@media (min-width:1040px){.actions .btn{display:inline-flex}.menu-panel .only-narrow{display:none}}
+.menu summary span,.menu summary span::before,.menu summary span::after{display:block;width:18px;height:2px;background:currentColor;border-radius:1px}
+.menu summary span{position:relative}
+.menu summary span::before,.menu summary span::after{content:"";position:absolute;left:0}
+.menu summary span::before{top:-6px}
+.menu summary span::after{top:6px}
+.menu[open] summary span{background:transparent}
+.menu[open] summary span::before{top:0;transform:rotate(45deg)}
+.menu[open] summary span::after{top:0;transform:rotate(-45deg)}
+.menu:not([open]) .menu-panel{display:none}
+.menu[open] .menu-panel{position:fixed;inset:0;z-index:1;background:#f4f6f8;padding:120px 28px 36px;display:flex;flex-direction:column;overflow:auto}
+.menu-panel a{display:flex;align-items:center;min-height:58px;padding:6px 0;font-size:clamp(30px,8vw,42px);font-weight:700;letter-spacing:-.03em;line-height:1;text-decoration:none;color:var(--ink);border-bottom:1px solid rgba(0,13,16,.12);border-radius:0}
+.menu-panel a:hover{background:transparent;color:var(--ash)}
+.menu-panel .menu-cta{margin-top:28px;align-self:flex-start;border:0;min-height:52px;padding:0 22px;font-size:17px;font-weight:700;letter-spacing:0;line-height:1;background:var(--ink);color:var(--white);border-radius:1000px}
+.menu-panel .menu-cta:hover{background:var(--ink);color:var(--white)}
+.site-header:has(.menu[open]){background:#f4f6f8;z-index:60;border-bottom-color:transparent}
+.site-header:has(.menu[open]) .bar{position:relative;z-index:2}
+.site-header:has(.menu[open]) .brand{position:relative;z-index:3}
+@media (min-width:1040px){.actions .btn{display:inline-flex}}
 @media (min-width:1040px){
   .bar{display:grid;grid-template-columns:1fr auto 1fr}
   .nav{display:flex;gap:4px}
@@ -145,24 +158,39 @@ button,input,select,textarea{font-family:inherit}
 @media (min-width:760px){.grid-hair{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 /* ---------- 1. hero ---------- */
-.hero{position:relative;background:var(--sky);padding:0 0 38px;margin-top:-96px;padding-top:96px;overflow:hidden}
+.hero{
+  position:relative;isolation:isolate;overflow:hidden;
+  background:#d5e2ee url("photos/heros.webp") center 18% / cover no-repeat;
+  min-height:100svh;padding:0 0 42px;margin-top:-96px;padding-top:96px;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(226,234,242,.84) 0%,rgba(226,234,242,.22) 14%,rgba(255,255,255,0) 36%,rgba(255,255,255,0) 54%,rgba(246,244,241,.82) 82%,#f6f4f1 100%),
+    linear-gradient(100deg,rgba(244,247,250,.88) 0%,rgba(244,247,250,.62) 34%,rgba(255,255,255,.16) 52%,rgba(255,255,255,0) 68%);
+}
+.hero .container{position:relative;z-index:1}
 .hero-wordmark{
-  font-size:clamp(44px,10.5vw,140px);line-height:.85;letter-spacing:-.02em;font-weight:700;
-  padding-top:34px;white-space:nowrap;
+  font-size:clamp(56px,8.4vw,120px);line-height:.84;letter-spacing:-.03em;font-weight:700;
+  padding-top:18px;max-width:5.6em;
 }
 .hero-wordmark sup{font-size:.3em;vertical-align:top;line-height:1}
-.hero-body{display:grid;gap:34px;margin-top:52px}
+.hero-body{display:grid;gap:14px;margin-top:clamp(8px,2vh,28px);max-width:32rem}
 .hero-body .kicker{font-size:17px;color:var(--ink)}
-.hero-body h1{margin-top:16px;max-width:10em}
-@media (min-width:900px){
-  .hero-body{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:end;margin-top:80px}
-  .hero-body h1{text-align:right;justify-self:end;margin-top:0}
-  .hero-body .kicker{align-self:end}
-}
-.hero-bottom{display:grid;gap:22px;margin-top:52px;padding-top:22px;border-top:1px solid rgba(0,13,16,.15)}
-.hero-bottom .lede{color:var(--ash);margin:0;max-width:30em}
+.hero-body h1{margin-top:0;max-width:8.2em}
+.hero-bottom{display:grid;gap:22px;margin-top:clamp(40px,8vh,88px);padding-top:22px;border-top:1px solid rgba(0,13,16,.15)}
+.hero-bottom .lede{color:var(--ink);margin:0;max-width:30em}
 .hero-cta{display:flex;flex-wrap:wrap;gap:11px}
 @media (min-width:900px){.hero-bottom{grid-template-columns:minmax(0,1fr) auto;align-items:center}}
+@media (max-width:899px){
+  .hero{min-height:100svh;background-position:center 22%;display:flex;flex-direction:column}
+  .hero .container{display:flex;flex-direction:column;flex:1}
+  .hero-wordmark{font-size:58px}
+  .hero-body{margin-top:auto;max-width:none}
+  .hero-body h1{max-width:11em;font-size:34px}
+  .hero-bottom{margin-top:18px}
+  .hero::before{background:linear-gradient(180deg,rgba(226,234,242,.62) 0%,rgba(255,255,255,0) 20%,rgba(255,255,255,0) 42%,rgba(246,244,241,.82) 60%,#f6f4f1 74%)}
+}
 
 .spec-figure{background:var(--deck);overflow:hidden;aspect-ratio:4/5;max-height:620px}
 @media (min-width:900px){.spec-figure{position:sticky;top:112px}}
@@ -199,7 +227,8 @@ button,input,select,textarea{font-family:inherit}
 .sol-dark .btn--ghost{color:var(--white);border-color:var(--white)}
 .sol-dark .btn--ghost:hover{background:var(--white);color:var(--ink)}
 .sol-photo{position:relative;background:var(--deck);color:var(--white);padding:0!important;min-height:420px}
-.sol-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sol-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:68% center}
+@media (min-width:900px){.sol-photo img{object-position:80% center}}
 .sol-photo .sol-label{position:relative;margin-top:auto;padding:53px 40px;background:linear-gradient(180deg,transparent,rgba(15,15,28,.7))}
 .sol-clay{background:var(--clay);color:var(--white)}
 .sol-clay .ash{color:rgba(255,255,255,.85)}
@@ -334,7 +363,7 @@ select option{background:var(--hull);color:var(--white)}
           <a href="#targets">Для кого</a>
           <a href="#faq">Вопросы</a>
           <a href="#contacts">Контакты</a>
-          <a class="only-narrow" href="#contacts">Запросить расчёт</a>
+          <a class="menu-cta" href="#contacts">Запросить расчёт</a>
         </div>
       </details>
     </div>
@@ -346,7 +375,7 @@ select option{background:var(--hull);color:var(--white)}
   <!-- 1. HERO -->
   <section class="hero" id="top">
     <div class="container">
-      <div class="hero-wordmark" aria-hidden="true">Burji Aloqa<sup>®</sup></div>
+      <div class="hero-wordmark" aria-hidden="true">Burji<br>Aloqa<sup>®</sup></div>
       <div class="hero-body">
         <p class="kicker">Монтаж и обслуживание опор двойного назначения</p>
         <h1 class="display">Опоры, на которых держится связь.</h1>
@@ -475,8 +504,8 @@ select option{background:var(--hull);color:var(--white)}
         </div>
       </div>
       <div class="sol-photo">
-        <img src="photos/odn2.webp" alt="Опора двойного назначения ОДН" loading="lazy">
-        <div class="sol-label"><span class="h3">Гранёная опора ОДН</span></div>
+        <img src="photos/telecom.webp" alt="Базовая станция связи на фоне города и гор" loading="lazy">
+        <div class="sol-label"><span class="h3">Сеть над городом</span></div>
       </div>
       <div class="sol-clay">
         <div></div>
@@ -631,11 +660,11 @@ select option{background:var(--hull);color:var(--white)}
               </div>
               <div class="field">
                 <label for="fPhone">Телефон *</label>
-                <input type="tel" id="fPhone" autocomplete="tel" placeholder="+998 __ ___ __ __" required>
+                <input type="tel" id="fPhone" autocomplete="tel" placeholder="+992 __ ___ __ __" required>
               </div>
               <div class="field">
                 <label for="fEmail">Email</label>
-                <input type="email" id="fEmail" autocomplete="email" placeholder="name@company.uz">
+                <input type="email" id="fEmail" autocomplete="email" placeholder="name@company.tj">
               </div>
               <div class="field full">
                 <label for="fService">Услуга *</label>
@@ -673,10 +702,10 @@ select option{background:var(--hull);color:var(--white)}
         </div>
 
         <dl class="info">
-          <div><dt>Телефон</dt><dd><a href="tel:+998712000000">+998 (71) 200-00-00</a><small>Приём звонков: 09:00 — 18:00 (пн–пт)</small></dd></div>
-          <div><dt>Email</dt><dd><a href="mailto:info@burjialoqa.uz">info@burjialoqa.uz</a></dd></div>
-          <div><dt>Мессенджеры</dt><dd class="chips"><a class="btn btn--ghost" href="https://t.me/burjialoqa_uz" target="_blank" rel="noopener">Telegram</a><a class="btn btn--ghost" href="https://wa.me/998712000000" target="_blank" rel="noopener">WhatsApp</a></dd></div>
-          <div><dt>Адрес</dt><dd>г. Ташкент, ул. Инженерная, 12</dd></div>
+          <div><dt>Телефон</dt><dd><a href="tel:+992372000000">+992 (37) 200-00-00</a><small>Приём звонков: 09:00 — 18:00 (пн–пт)</small></dd></div>
+          <div><dt>Email</dt><dd><a href="mailto:info@burjialoqa.tj">info@burjialoqa.tj</a></dd></div>
+          <div><dt>Мессенджеры</dt><dd class="chips"><a class="btn btn--ghost" href="https://t.me/burjialoqa_tj" target="_blank" rel="noopener">Telegram</a><a class="btn btn--ghost" href="https://wa.me/992372000000" target="_blank" rel="noopener">WhatsApp</a></dd></div>
+          <div><dt>Адрес</dt><dd>г. Душанбе</dd></div>
           <div><dt>Аварийная диспетчерская</dt><dd>Круглосуточно, 24/7/365</dd></div>
         </dl>
       </div>
@@ -707,9 +736,9 @@ select option{background:var(--hull);color:var(--white)}
       </div>
       <div>
         <h4>Контакты</h4>
-        <a href="tel:+998712000000">+998 (71) 200-00-00</a>
-        <a href="mailto:info@burjialoqa.uz">info@burjialoqa.uz</a>
-        <a href="#contacts">г. Ташкент</a>
+        <a href="tel:+992372000000">+992 (37) 200-00-00</a>
+        <a href="mailto:info@burjialoqa.tj">info@burjialoqa.tj</a>
+        <a href="#contacts">г. Душанбе</a>
       </div>
     </div>
     <div class="foot-bottom">
@@ -721,7 +750,7 @@ select option{background:var(--hull);color:var(--white)}
 
 <script>
 (function(){
-  var TG='burjialoqa_uz', WA='998712000000';
+  var TG='burjialoqa_tj', WA='992372000000';
   var ODN=[
     {code:'01 · Антенны',title:'Секторные антенны сотовой связи (3G / 4G / 5G)',desc:'Панельные секторные антенны мобильных операторов с регулируемым углом наклона луча (Tilt). Размещение оборудования до 4 операторов на разных высотных ярусах.',p:['700–3800 МГц (LTE / 5G NR)','3–6 секторов (360° охват)','До 4 операторов связи','до 36 м/с (СНиП регион III–IV)']},
     {code:'02 · Радиоблоки RRU',title:'Выносные радиоблоки RRU и коммутация',desc:'Радиомодули вынесены непосредственно к антеннам для снижения потерь мощности. Пассивное радиаторное охлаждение и оптические кроссы CPRI/eCPRI.',p:['Выходная мощность 4x40W / 4x80W','Оптический интерфейс eCPRI','Степень защиты корпуса IP67','Пассивное охлаждение без шума']},
@@ -736,9 +765,12 @@ select option{background:var(--hull);color:var(--white)}
   function onScroll(){header.classList.toggle('scrolled',window.scrollY>40)}
   onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
 
+  var menu=document.querySelector('.menu');
   document.querySelectorAll('.menu a').forEach(function(a){
-    a.addEventListener('click',function(){a.closest('details').open=false});
+    a.addEventListener('click',function(){menu.open=false});
   });
+  menu.addEventListener('toggle',function(){document.body.style.overflow=menu.open?'hidden':''});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')menu.open=false});
 
   var tabs=document.querySelectorAll('.tab');
   tabs.forEach(function(t){
