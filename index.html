@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Burji Aloqa — опоры двойного назначения (ОДН)</title>
+<meta name="description" content="Проектирование, монтаж и обслуживание опор двойного назначения (ОДН) для операторов связи: от обследования до аварийного ремонта.">
+<meta name="keywords" content="опоры двойного назначения, ОДН, монтаж опор связи, обслуживание ОДН, базовые станции, телекоммуникационная инфраструктура">
+<meta name="author" content="Burji Aloqa">
+<meta name="theme-color" content="#ffffff">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Burji Aloqa — опоры двойного назначения (ОДН)">
+<meta property="og:description" content="Полный цикл работ с ОДН: проект, фундаменты, монтаж оборудования 4G/5G и круглосуточное обслуживание.">
+<meta property="og:locale" content="ru_RU">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E📡%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Burji Aloqa",
+  "description": "Проектирование, строительство и обслуживание опор двойного назначения (ОДН) для операторов связи",
+  "url": "https://burjialoqa.uz",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+998-71-200-00-00",
+    "contactType": "customer service",
+    "availableLanguage": ["Russian", "Uzbek"]
+  }
+}
+</script>
+
+<script>document.documentElement.classList.add('js')</script>
+
+<style>
+/* ==========================================================================
+   Burji Aloqa — визуальная система по DESIGN.md (Hyer Aviation):
+   белый холст, тяжёлые заголовки 700 с плотным трекингом, чёрные пилюли,
+   hairline-сетка, тёмные полосы, один глиняный акцент на страницу.
+   ========================================================================== */
+:root{
+  --ink:#000d10;        /* Deep Ink: текст, кнопки, футер */
+  --white:#ffffff;      /* Pure White: холст */
+  --ash:#6b6b73;        /* Cool Ash затемнён до ≈4.9:1 на белом */
+  --pebble:#d5d3d4;     /* Pebble: hairline */
+  --hull:#0f0f1c;       /* Midnight Hull: тёмная секция */
+  --deck:#151623;       /* Charcoal Deck: тёмная панель */
+  --clay:#bc7155;       /* Clay Ember: единственный акцент */
+  --sky:linear-gradient(180deg,#dfe7ef 0%,#eef1f3 55%,#f6f1ea 100%); /* небо hero */
+  --font:Inter,"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --gap:80px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--white);-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased}
+body{
+  margin:0;background:var(--white);color:var(--ink);
+  font:400 18px/1.61 var(--font);
+  overflow-x:clip;
+}
+h1,h2,h3,h4,p,ul,ol,dl,dd,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:inherit}
+img{display:block;max-width:100%}
+button,input,select,textarea{font-family:inherit}
+[id]{scroll-margin-top:96px}
+
+.container{max-width:1200px;margin-inline:auto;padding-inline:20px}
+@media (min-width:900px){.container{padding-inline:40px}}
+.skip{position:absolute;left:20px;top:-100px;z-index:30;background:var(--ink);color:var(--white);padding:12px 22px;border-radius:1000px;font-weight:700;font-size:17px}
+.skip:focus{top:16px}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.dark :focus-visible{outline-color:var(--white)}
+
+/* ---------- типографика ---------- */
+.display{font-size:clamp(44px,7vw,63px);line-height:1;letter-spacing:-.02em;font-weight:700}
+.h2{font-size:clamp(34px,4.6vw,52px);line-height:1;letter-spacing:-.01em;font-weight:700}
+.h3{font-size:clamp(26px,3vw,37px);line-height:1;letter-spacing:-.01em;font-weight:700}
+.sub{font-size:23px;line-height:1.1;letter-spacing:-.23px;font-weight:700}
+.caption{font-size:17px;line-height:1.3;font-weight:700}
+.ash{color:var(--ash)}
+.lede{margin-top:22px;max-width:36em}
+
+/* ---------- кнопки ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:48px;padding:15px 22px 16px;
+  font-size:17px;line-height:1;font-weight:700;
+  color:var(--white);background:var(--ink);border:1px solid var(--ink);border-radius:1000px;
+  text-decoration:none;cursor:pointer;white-space:nowrap;
+  transition:background-color .2s,color .2s,border-color .2s;
+}
+.btn:hover{background:var(--white);color:var(--ink)}
+.btn--ghost{background:transparent;color:var(--ink)}
+.btn--ghost:hover{background:var(--ink);color:var(--white)}
+.dark .btn{background:var(--white);color:var(--ink);border-color:var(--white)}
+.dark .btn:hover{background:transparent;color:var(--white)}
+.dark .btn--ghost{background:transparent;color:var(--white)}
+.dark .btn--ghost:hover{background:var(--white);color:var(--ink)}
+.arrow{display:inline-flex;align-items:center;gap:8px;font-size:17px;font-weight:700;text-decoration:none;min-height:44px}
+.arrow:hover{text-decoration:underline;text-underline-offset:4px}
+
+/* ---------- шапка ---------- */
+.site-header{position:sticky;top:0;z-index:20;padding-block:22px;background:transparent;transition:background-color .2s,padding .2s,border-color .2s;border-bottom:1px solid transparent}
+.site-header.scrolled{background:rgba(255,255,255,.92);border-bottom-color:var(--pebble);padding-block:14px}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none;font-weight:700;font-size:20px;letter-spacing:-.2px;min-height:44px}
+.brand-mark{width:40px;height:44px;border:2px solid var(--ink);border-radius:0 0 18px 0;display:grid;place-items:center;font-size:22px;font-weight:700;line-height:1;position:relative}
+.brand-mark::after{content:"®";position:absolute;top:2px;right:3px;font-size:8px;font-weight:400}
+.nav{display:none}
+.nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 13px;font-size:20px;text-decoration:none;color:var(--ink)}
+.nav a:hover{color:var(--ash)}
+.actions{display:flex;align-items:center;gap:12px}
+.actions .btn{display:none}
+.menu{position:relative}
+.menu summary{list-style:none;cursor:pointer;width:52px;height:52px;border-radius:50%;background:var(--ink);color:var(--white);display:grid;place-items:center}
+.menu summary::-webkit-details-marker{display:none}
+.menu summary span{display:block;width:18px;height:2px;background:currentColor;box-shadow:0 -6px 0 currentColor,0 6px 0 currentColor}
+.menu-panel{position:absolute;right:0;top:calc(100% + 12px);width:280px;background:var(--white);border:1px solid var(--pebble);border-radius:22px;padding:12px}
+.menu-panel a{display:flex;align-items:center;min-height:48px;padding:0 16px;font-size:20px;text-decoration:none;border-radius:1000px}
+.menu-panel a:hover{background:#f1f1f3}
+@media (min-width:1040px){.actions .btn{display:inline-flex}.menu-panel .only-narrow{display:none}}
+@media (min-width:1040px){
+  .bar{display:grid;grid-template-columns:1fr auto 1fr}
+  .nav{display:flex;gap:4px}
+  .menu{display:none}
+}
+
+/* ---------- секции ---------- */
+.section{padding-block:var(--gap)}
+.dark{background:var(--hull);color:var(--white)}
+.dark .ash{color:rgba(255,255,255,.72)}
+.dark .rule,.dark .grid-hair>*{border-color:rgba(255,255,255,.18)}
+.rule{border-top:1px solid var(--pebble)}
+.grid-hair{display:grid;gap:52px 80px;counter-reset:hair}
+.grid-hair>*{border-top:1px solid var(--pebble);padding-top:22px;counter-increment:hair}
+.grid-hair>*::before{content:counter(hair,decimal-leading-zero);display:block;font-size:17px;font-weight:700;color:var(--ash);margin-bottom:22px}
+.grid-hair .sub{margin-bottom:11px}
+@media (min-width:760px){.grid-hair{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ---------- 1. hero ---------- */
+.hero{position:relative;background:var(--sky);padding:0 0 38px;margin-top:-96px;padding-top:96px;overflow:hidden}
+.hero-wordmark{
+  font-size:clamp(44px,10.5vw,140px);line-height:.85;letter-spacing:-.02em;font-weight:700;
+  padding-top:34px;white-space:nowrap;
+}
+.hero-wordmark sup{font-size:.3em;vertical-align:top;line-height:1}
+.hero-body{display:grid;gap:34px;margin-top:52px}
+.hero-body .kicker{font-size:17px;color:var(--ink)}
+.hero-body h1{margin-top:16px;max-width:10em}
+@media (min-width:900px){
+  .hero-body{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:end;margin-top:80px}
+  .hero-body h1{text-align:right;justify-self:end;margin-top:0}
+  .hero-body .kicker{align-self:end}
+}
+.hero-bottom{display:grid;gap:22px;margin-top:52px;padding-top:22px;border-top:1px solid rgba(0,13,16,.15)}
+.hero-bottom .lede{color:var(--ash);margin:0;max-width:30em}
+.hero-cta{display:flex;flex-wrap:wrap;gap:11px}
+@media (min-width:900px){.hero-bottom{grid-template-columns:minmax(0,1fr) auto;align-items:center}}
+
+.spec-figure{background:var(--deck);overflow:hidden;aspect-ratio:4/5;max-height:620px}
+@media (min-width:900px){.spec-figure{position:sticky;top:112px}}
+.spec-figure img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
+
+/* ---------- 2. о компании ---------- */
+.about .lede{font-size:clamp(23px,2.6vw,30px);line-height:1.1;letter-spacing:-.2px;font-weight:700;max-width:28em;margin-top:0}
+.about .grid-hair{margin-top:68px}
+.shots{margin-top:68px;display:grid;gap:16px}
+.shot{position:relative;background:var(--deck);color:var(--white);overflow:hidden;min-height:380px;display:flex;align-items:flex-end}
+.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
+.shot .cap{position:relative;padding:68px 22px 22px;background:linear-gradient(180deg,transparent,rgba(15,15,28,.92));width:100%}
+.shot .cap p{margin-top:8px;color:rgba(255,255,255,.8);font-size:17px;line-height:1.4}
+@media (min-width:900px){.shots{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* ---------- 3. услуги ---------- */
+.services-head{display:grid;gap:22px}
+@media (min-width:900px){.services-head{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:end}.services-head .lede{justify-self:end}}
+.rows{margin-top:52px}
+.row{display:grid;gap:16px;padding:31px 0;border-top:1px solid var(--pebble)}
+.row:last-child{border-bottom:1px solid var(--pebble)}
+.row .num{font-size:17px;font-weight:700;color:var(--ash)}
+.row ul{margin-top:16px}
+.row li{position:relative;padding:3px 0 3px 22px;font-size:17px;line-height:1.5;color:var(--ash)}
+.row li::before{content:"—";position:absolute;left:0}
+.row .arrow{margin-top:16px}
+@media (min-width:900px){.row{grid-template-columns:80px minmax(0,1fr) minmax(0,1.3fr);gap:22px 40px}}
+
+/* ---------- 4. ОДН: составная карта ---------- */
+.solutions{display:grid;gap:0}
+.solutions>*{padding:53px 40px;min-height:480px;display:flex;flex-direction:column;justify-content:space-between}
+@media (max-width:899px){.solutions>*{padding:38px 22px}}
+.sol-dark{background:var(--hull);color:var(--white)}
+.sol-dark .btn--ghost{color:var(--white);border-color:var(--white)}
+.sol-dark .btn--ghost:hover{background:var(--white);color:var(--ink)}
+.sol-photo{position:relative;background:var(--deck);color:var(--white);padding:0!important;min-height:420px}
+.sol-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sol-photo .sol-label{position:relative;margin-top:auto;padding:53px 40px;background:linear-gradient(180deg,transparent,rgba(15,15,28,.7))}
+.sol-clay{background:var(--clay);color:var(--white)}
+.sol-clay .ash{color:rgba(255,255,255,.85)}
+@media (min-width:900px){.solutions{grid-template-columns:1fr 1fr 1fr}}
+.spec-wrap{margin-top:var(--gap);display:grid;gap:52px}
+@media (min-width:900px){.spec-wrap{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:80px;align-items:start}}
+.spec-copy .tabs{margin-top:38px}
+.spec{margin-top:31px}
+.spec div{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 22px;padding:15px 0;border-top:1px solid var(--pebble)}
+.spec div:last-child{border-bottom:1px solid var(--pebble)}
+.spec dt{color:var(--ash)}
+.spec dd{font-weight:700;text-align:right}
+.tabs{display:flex;flex-wrap:wrap;gap:11px;align-content:start}
+.tab{min-height:48px;padding:15px 22px 16px;font-size:17px;line-height:1;font-weight:700;color:var(--ink);background:transparent;border:1px solid var(--ink);border-radius:1000px;cursor:pointer;transition:background-color .2s,color .2s}
+.tab:hover,.tab[aria-pressed="true"]{background:var(--ink);color:var(--white)}
+.adv{margin-top:var(--gap)}
+
+/* ---------- 5. процесс ---------- */
+.steps{margin-top:52px}
+.step{display:grid;gap:16px;padding:31px 0;border-top:1px solid rgba(255,255,255,.18)}
+.step:last-child{border-bottom:1px solid rgba(255,255,255,.18)}
+.step .num{font-size:clamp(37px,5vw,63px);line-height:1;letter-spacing:-.02em;font-weight:700;color:rgba(255,255,255,.35)}
+.step p{margin-top:11px;color:rgba(255,255,255,.72);max-width:36em}
+@media (min-width:900px){.step{grid-template-columns:160px minmax(0,1fr);gap:40px}}
+.dark-right{display:grid;gap:34px}
+@media (min-width:900px){.dark-right{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.dark-right>:last-child{grid-column:2}}
+
+/* ---------- 6. для кого ---------- */
+.targets{margin-top:52px;display:grid;gap:16px}
+.target{border:1px solid var(--pebble);padding:31px 22px;display:flex;flex-direction:column;justify-content:space-between;gap:34px}
+.target p{margin-top:16px;color:var(--ash)}
+@media (min-width:900px){.targets{grid-template-columns:repeat(3,minmax(0,1fr))}.target{padding:38px 31px}}
+
+/* ---------- 7. цифры ---------- */
+.stats{display:grid;gap:34px 40px;margin-top:52px}
+.stat{border-top:1px solid var(--pebble);padding-top:22px}
+.stat strong{display:block;font-size:clamp(44px,6vw,63px);line-height:1;letter-spacing:-.02em;font-weight:700}
+.stat span{display:block;margin-top:11px;color:var(--ash)}
+@media (min-width:600px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:900px){.stats{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+/* ---------- 8. FAQ ---------- */
+#faq{padding-top:0}
+.faq{margin-top:52px}
+.faq details{border-top:1px solid var(--pebble)}
+.faq details:last-child{border-bottom:1px solid var(--pebble)}
+.faq summary{list-style:none;cursor:pointer;min-height:48px;padding:23px 60px 23px 0;position:relative;font-size:23px;line-height:1.1;letter-spacing:-.23px;font-weight:700}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:0;top:18px;width:36px;height:36px;border:1px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-weight:400;font-size:22px}
+.faq details[open] summary::after{content:"\2212"}
+.faq details p{padding:0 60px 31px 0;max-width:40em;color:var(--ash)}
+
+/* ---------- 9. контакты (тёмная секция) ---------- */
+.contact-grid{margin-top:52px;display:grid;gap:52px}
+@media (min-width:1040px){.contact-grid{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:80px}}
+form{display:grid;gap:22px}
+.fields{display:grid;gap:22px}
+.field label{display:block;font-size:17px;font-weight:700;margin-bottom:8px}
+input,select,textarea{
+  display:block;width:100%;min-height:52px;
+  font-size:18px;line-height:1.3;color:var(--white);background:transparent;
+  border:1px solid rgba(255,255,255,.3);border-radius:1000px;padding:14px 22px;
+  transition:border-color .2s;
+}
+textarea{border-radius:22px;min-height:132px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:var(--white);outline:none}
+::placeholder{color:rgba(255,255,255,.5);opacity:1}
+select option{background:var(--hull);color:var(--white)}
+.consent{display:flex;align-items:flex-start;gap:13px;font-size:17px;line-height:1.4;cursor:pointer;color:rgba(255,255,255,.8)}
+.consent input{width:22px;min-height:22px;height:22px;flex:none;margin:2px 0 0;padding:0;accent-color:var(--white);border-radius:4px}
+.form-actions{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center}
+.form-actions .ash{font-size:17px}
+.info>div{border-top:1px solid rgba(255,255,255,.18);padding:22px 0}
+.info>div:last-child{border-bottom:1px solid rgba(255,255,255,.18)}
+.info dt{font-size:17px;color:rgba(255,255,255,.6);margin-bottom:6px}
+.info dd{font-size:23px;line-height:1.2;font-weight:700;letter-spacing:-.23px}
+.info dd small{display:block;margin-top:6px;font-size:17px;font-weight:400;color:rgba(255,255,255,.6)}
+.info a{text-decoration:none}
+.info a:hover{text-decoration:underline;text-underline-offset:4px}
+.chips{display:flex;flex-wrap:wrap;gap:11px;margin-top:4px}
+@media (min-width:600px){.fields{grid-template-columns:1fr 1fr}.fields .full{grid-column:1/-1}}
+.success{display:none;gap:16px;align-content:start}
+.success.shown{display:grid}
+.success p{max-width:32em;color:rgba(255,255,255,.72)}
+.success-actions{display:flex;flex-wrap:wrap;gap:11px}
+
+/* ---------- футер-терминал ---------- */
+.site-footer{background:var(--ink);color:var(--white);padding:var(--gap) 0 34px}
+.foot-word{font-size:clamp(48px,11vw,160px);line-height:1;letter-spacing:-.02em;font-weight:700;white-space:nowrap}
+.foot-word sup{font-size:.25em;vertical-align:top;line-height:1}
+.foot-grid{display:grid;gap:34px;margin-top:68px}
+.foot-grid h4{font-size:17px;color:var(--ash);font-weight:400;margin-bottom:13px}
+.foot-grid a{display:block;font-size:20px;text-decoration:none;padding:4px 0;color:var(--white)}
+.foot-grid a:hover{color:var(--ash)}
+@media (min-width:760px){.foot-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.foot-bottom{margin-top:68px;padding-top:22px;border-top:1px solid rgba(255,255,255,.18);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 22px;color:var(--ash);font-size:17px}
+
+/* ---------- появление ---------- */
+.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease-out,transform .5s ease-out}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important}
+  .js .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">К содержанию</a>
+
+<!-- ШАПКА -->
+<header class="site-header" id="siteNav">
+  <div class="container bar">
+    <a class="brand" href="#top" aria-label="Burji Aloqa — на главную"><span class="brand-mark" aria-hidden="true">B</span><span>Burji Aloqa</span></a>
+    <nav class="nav" aria-label="Основное меню">
+      <a href="#about">О нас</a>
+      <a href="#services">Услуги</a>
+      <a href="#odn">Опора ОДН</a>
+      <a href="#process">Процесс</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <div class="actions">
+      <a class="btn" href="#contacts">Запросить расчёт</a>
+      <details class="menu">
+        <summary aria-label="Меню"><span></span></summary>
+        <div class="menu-panel">
+          <a href="#about">О нас</a>
+          <a href="#services">Услуги</a>
+          <a href="#odn">Опора ОДН</a>
+          <a href="#process">Процесс</a>
+          <a href="#targets">Для кого</a>
+          <a href="#faq">Вопросы</a>
+          <a href="#contacts">Контакты</a>
+          <a class="only-narrow" href="#contacts">Запросить расчёт</a>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- 1. HERO -->
+  <section class="hero" id="top">
+    <div class="container">
+      <div class="hero-wordmark" aria-hidden="true">Burji Aloqa<sup>®</sup></div>
+      <div class="hero-body">
+        <p class="kicker">Монтаж и обслуживание опор двойного назначения</p>
+        <h1 class="display">Опоры, на которых держится связь.</h1>
+      </div>
+      <div class="hero-bottom">
+        <p class="lede">Проект, фундаменты, монтаж оборудования 4G/5G и круглосуточное обслуживание ОДН для операторов связи.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#contacts">Запросить расчёт</a>
+          <a class="btn btn--ghost" href="#services">Что мы делаем</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. О КОМПАНИИ -->
+  <section class="section about" id="about">
+    <div class="container reveal">
+      <p class="lede">Инженерная команда с полным циклом СМР: проектируем, монтируем и круглосуточно содержим каждую порученную нам конструкцию.</p>
+      <div class="grid-hair">
+        <div>
+          <h3 class="sub">Полный цикл</h3>
+          <p class="ash">От обследования площадки и согласований до монтажа оборудования и планового ТО.</p>
+        </div>
+        <div>
+          <h3 class="sub">Собственные бригады</h3>
+          <p class="ash">Аттестованные высотники и монтажники, своя техника и инструмент.</p>
+        </div>
+        <div>
+          <h3 class="sub">По нормативам</h3>
+          <p class="ash">Расчёт нагрузок, документация и экспертиза по СНиП и ГОСТ.</p>
+        </div>
+        <div>
+          <h3 class="sub">Аварийная служба</h3>
+          <p class="ash">Диспетчерская 24/7 и бригады с нормативом прибытия по SLA.</p>
+        </div>
+      </div>
+      <div class="shots">
+        <figure class="shot">
+          <img src="photos/onas.webp" alt="Строительно-монтажные работы: установка ствола ОДН на фундамент" loading="lazy">
+          <figcaption class="cap"><h3 class="sub">Строительство фундаментов и СМР</h3><p>Монолитные фундаменты, затяжка шпилек с динамометрическим контролем, сборка секций.</p></figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="photos/onas2.webp" alt="Инженеры за пусконаладочными работами у шкафа ОДН" loading="lazy">
+          <figcaption class="cap"><h3 class="sub">Пусконаладка и аудит</h3><p>Кабельные вводы, КСВ антенн, контур заземления и шкафы питания по чек-листам операторов.</p></figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="photos/odn2.webp" alt="Опора ОДН на городском проспекте" loading="lazy">
+          <figcaption class="cap"><h3 class="sub">Городская среда</h3><p>Гранёный ствол выглядит как аккуратный столб освещения и не перегружает облик улиц.</p></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. УСЛУГИ -->
+  <section class="section" id="services">
+    <div class="container reveal">
+      <div class="services-head">
+        <h2 class="h2">Инженерные решения для операторов связи.</h2>
+        <p class="lede ash">Оказываем услуги как отдельными этапами, так и под ключ: от предпроектных изысканий до постоянного технического обслуживания.</p>
+      </div>
+      <div class="rows">
+        <article class="row">
+          <span class="num">01</span>
+          <h3 class="h3">Проектирование и согласование</h3>
+          <div>
+            <p>Инструментальное обследование площадок, геодезия, расчёт ветровых и гололёдных нагрузок под конкретный район, разработка разделов КМ/КЖ/ЭО.</p>
+            <ul>
+              <li>Расчёт статических и динамических нагрузок</li>
+              <li>Согласования с дорожными и энергослужбами</li>
+              <li>Строительная и государственная экспертиза</li>
+            </ul>
+            <a class="arrow" href="#contacts" data-srv="0">Запросить расчёт проекта →</a>
+          </div>
+        </article>
+        <article class="row">
+          <span class="num">02</span>
+          <h3 class="h3">Установка и монтаж опор ОДН</h3>
+          <div>
+            <p>Земляные работы, устройство монолитных анкерных фундаментов, монтаж гранёных стальных опор высотой от 15 до 36 метров с защитным цинкованием.</p>
+            <ul>
+              <li>Анкерные группы с запасом прочности 1.4</li>
+              <li>Горячее оцинкование по ГОСТ 9.307-89</li>
+              <li>Усиление существующих опор освещения</li>
+            </ul>
+            <a class="arrow" href="#contacts" data-srv="1">Запросить монтаж опор →</a>
+          </div>
+        </article>
+        <article class="row">
+          <span class="num">03</span>
+          <h3 class="h3">Монтаж телеком-оборудования</h3>
+          <div>
+            <p>Высотный монтаж антенн 4G/5G, выносных радиоблоков RRU, радиорелейных линий, прокладка оптоволокна и устройство заземления.</p>
+            <ul>
+              <li>Юстировка азимута и наклона антенн</li>
+              <li>Скрытая проводка внутри ствола</li>
+              <li>Заземление и молниезащита, R &lt; 4 Ом</li>
+            </ul>
+            <a class="arrow" href="#contacts" data-srv="2">Запросить телеком-монтаж →</a>
+          </div>
+        </article>
+        <article class="row">
+          <span class="num">04</span>
+          <h3 class="h3">Обслуживание и аварийный ремонт</h3>
+          <div>
+            <p>Плановое регламентное ТО, контроль момента затяжки болтов, тепловизионная диагностика и круглосуточный выезд дежурной бригады при инцидентах.</p>
+            <ul>
+              <li>Диспетчерский мониторинг 24/7</li>
+              <li>Аварийные бригады с автовышками</li>
+              <li>Нормативы восстановления по SLA</li>
+            </ul>
+            <a class="arrow" href="#contacts" data-srv="3">Запросить ТО и эксплуатацию →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. ОДН: составная карта решений + спецификация -->
+  <section id="odn">
+    <div class="solutions reveal">
+      <div class="sol-dark">
+        <h2 class="h3">Опора ОДН</h2>
+        <div>
+          <p class="sub" style="margin-bottom:22px">Связь, освещение и видеонаблюдение на одной компактной конструкции.</p>
+          <a class="btn btn--ghost" href="#spec">Смотреть спецификацию</a>
+        </div>
+      </div>
+      <div class="sol-photo">
+        <img src="photos/odn2.webp" alt="Опора двойного назначения ОДН" loading="lazy">
+        <div class="sol-label"><span class="h3">Гранёная опора ОДН</span></div>
+      </div>
+      <div class="sol-clay">
+        <div></div>
+        <div>
+          <h3 class="h3" style="margin-bottom:16px">Модернизация опор освещения →</h3>
+          <p class="ash">Замена ветхих столбов на современные ОДН с сохранением электросетей и питания светильника.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="spec-wrap reveal" id="spec">
+        <figure class="spec-figure">
+          <img src="photos/hero.webp" alt="Оголовок опоры ОДН: секторные антенны, радиоблоки RRU и камера" loading="lazy">
+        </figure>
+        <div class="spec-copy" aria-live="polite">
+          <span class="caption ash" id="odnTabCode">01 · Антенны</span>
+          <h3 class="h3" id="odnTabTitle" style="margin-top:13px">Секторные антенны сотовой связи (3G / 4G / 5G)</h3>
+          <p class="ash" id="odnTabDesc" style="margin-top:22px">Панельные антенны сотовой связи с независимой регулировкой угла наклона луча (Tilt). Размещение оборудования до 4 операторов на разных высотных ярусах.</p>
+          <dl class="spec">
+            <div><dt>Частотный диапазон</dt><dd id="odnTabP1">700–3800 МГц (LTE / 5G NR)</dd></div>
+            <div><dt>Конфигурация секторов</dt><dd id="odnTabP2">3–6 секторов (360° охват)</dd></div>
+            <div><dt>Совместное размещение</dt><dd id="odnTabP3">До 4 операторов связи</dd></div>
+            <div><dt>Ветровой напор</dt><dd id="odnTabP4">до 36 м/с (СНиП регион III–IV)</dd></div>
+          </dl>
+          <div class="tabs">
+            <button type="button" class="tab" data-odn="0" aria-pressed="true">Антенны 5G/4G</button>
+            <button type="button" class="tab" data-odn="1" aria-pressed="false">Радиоблоки RRU</button>
+            <button type="button" class="tab" data-odn="2" aria-pressed="false">Видеонаблюдение</button>
+            <button type="button" class="tab" data-odn="3" aria-pressed="false">Светильник LED</button>
+            <button type="button" class="tab" data-odn="4" aria-pressed="false">Скрытый кабель</button>
+            <button type="button" class="tab" data-odn="5" aria-pressed="false">Фундамент</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="adv reveal">
+        <h2 class="h2">Одна опора — несколько функций.</h2>
+        <div class="grid-hair" style="margin-top:52px">
+          <div><h3 class="sub">Монтаж быстрее тяжёлой вышки</h3><p class="ash">Сборка и подъём конструкции производятся за считанные дни благодаря готовым фланцевым секциям и типовым анкерам.</p></div>
+          <div><h3 class="sub">Городская интеграция</h3><p class="ash">Аккуратный силуэт гармонично дополняет городскую застройку без громоздких промышленных решёток.</p></div>
+          <div><h3 class="sub">Несколько сервисов</h3><p class="ash">Освещение проспектов, сотовая связь нескольких операторов и камеры безопасности на одной опоре.</p></div>
+          <div><h3 class="sub">Скрытая проводка</h3><p class="ash">Все кабели защищены внутри полого ствола от ультрафиолета, осадков, обрывов и вандализма.</p></div>
+        </div>
+      </div>
+    </div>
+    <div style="height:var(--gap)"></div>
+  </section>
+
+  <!-- 5. ПРОЦЕСС (тёмная секция) -->
+  <section class="section dark" id="process">
+    <div class="container reveal">
+      <div class="dark-right">
+        <h2 class="h2">От заявки до пуска.</h2>
+        <p class="ash">Строгий регламент исключает простои и обеспечивает успешную сдачу объекта приёмочной комиссии оператора.</p>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="num">01</span><div><h3 class="sub">Заявка и технические условия (ТУ)</h3><p>Получаем координаты локации, требуемую высоту подвеса и технические требования оператора по антеннам и питанию.</p></div></li>
+        <li class="step"><span class="num">02</span><div><h3 class="sub">Обследование площадки и расчёт нагрузок</h3><p>Геодезическая съёмка, анализ грунтов, расчёт ветровых и моментных нагрузок на металлоконструкцию ОДН.</p></div></li>
+        <li class="step"><span class="num">03</span><div><h3 class="sub">Согласование и рабочий проект (РД)</h3><p>Разработка проектной документации КМ, КЖ, ЭО. Согласование с балансодержателями дорог и городскими службами.</p></div></li>
+        <li class="step"><span class="num">04</span><div><h3 class="sub">Монтаж металлоконструкции и запуск БС</h3><p>Устройство монолитного фундамента, монтаж ствола, навеска оборудования, скрытая укладка кабелей, юстировка и пусконаладка.</p></div></li>
+        <li class="step"><span class="num">05</span><div><h3 class="sub">Эксплуатация и круглосуточное ТО</h3><p>Ввод в постоянную эксплуатацию, плановое техническое обслуживание и круглосуточная готовность аварийной бригады.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6. ДЛЯ КОГО -->
+  <section class="section" id="targets">
+    <div class="container reveal">
+      <h2 class="h2">Для операторов, городов и девелоперов.</h2>
+      <div class="targets">
+        <article class="target">
+          <div>
+            <h3 class="sub">Операторам связи и генподрядчикам</h3>
+            <p>Быстрое развёртывание 4G/5G сетей в плотной застройке без поиска места под тяжёлые мачты. Готовая площадка с питанием и согласованиями.</p>
+          </div>
+          <a class="btn btn--ghost" href="#contacts" data-tgt="operator">Узнать условия</a>
+        </article>
+        <article class="target">
+          <div>
+            <h3 class="sub">Владельцам опор освещения</h3>
+            <p>Модернизация парка уличного освещения за счёт телеком-инвестиций, монетизация инфраструктуры и готовые узлы под камеры видеоаналитики.</p>
+          </div>
+          <a class="btn btn--ghost" href="#contacts" data-tgt="municipality">Узнать условия</a>
+        </article>
+        <article class="target">
+          <div>
+            <h3 class="sub">Девелоперам и владельцам зданий</h3>
+            <p>Стабильный мобильный интернет на территории строящихся ЖК и коммерческих кластеров без искажения архитектурного ландшафта.</p>
+          </div>
+          <a class="btn btn--ghost" href="#contacts" data-tgt="developer">Узнать условия</a>
+        </article>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><strong>24/7</strong><span>Круглосуточный аварийный мониторинг</span></div>
+        <div class="stat"><strong>36 м</strong><span>Максимальная высота опор ОДН</span></div>
+        <div class="stat"><strong>100%</strong><span>Соответствие СНиП и ГОСТ</span></div>
+        <div class="stat"><strong>до 4</strong><span>Операторов на одной конструкции</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. ВОПРОСЫ -->
+  <section class="section" id="faq">
+    <div class="container reveal">
+      <h2 class="h2">Частые вопросы по ОДН.</h2>
+      <div class="faq">
+        <details name="faq">
+          <summary>Что такое ОДН и чем опора отличается от тяжёлой вышки связи?</summary>
+          <p>Опора двойного назначения (ОДН) — гранёная стальная конструкция, совмещающая функцию уличного освещения и базовой станции мобильной связи. Она занимает минимальное пятно застройки (от 1.5×1.5 м), имеет эстетичный облик столба освещения со скрытыми внутри кабелями и легко согласуется в черте города.</p>
+        </details>
+        <details name="faq">
+          <summary>Какие данные нужны для предварительного расчёта?</summary>
+          <p>Координаты локации, планируемая высота подвеса антенн, состав оборудования (масса и габариты панелей и радиоблоков) и статус площадки: новое строительство или замена существующей опоры.</p>
+        </details>
+        <details name="faq">
+          <summary>Сколько времени занимает установка опоры под ключ?</summary>
+          <p>Строительно-монтажные работы (фундамент, сборка ствола, монтаж оборудования) занимают от 2 до 3 недель. Полный цикл с согласованиями зависит от статуса земельного участка.</p>
+        </details>
+        <details name="faq">
+          <summary>Возможна ли модернизация существующей опоры освещения?</summary>
+          <p>Да. Мы проводим инструментальное обследование несущей способности. При нехватке запаса прочности производится демонтаж и замена на современную стойку ОДН с сохранением питания светильника.</p>
+        </details>
+        <details name="faq">
+          <summary>Как организована аварийная служба и каков регламент выезда?</summary>
+          <p>Аварийная служба дежурит в режиме 24/7/365. Время прибытия бригады на объект регламентируется договором SLA (как правило, до 2–4 часов в черте города).</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. КОНТАКТЫ (тёмная секция) -->
+  <section class="section dark" id="contacts" style="background:var(--deck)">
+    <div class="container reveal">
+      <div class="dark-right">
+        <h2 class="h2">Начните с инженерного расчёта.</h2>
+        <p class="ash">Заполните параметры задачи. Инженер Burji Aloqa подготовит предварительное технико-коммерческое предложение и свяжется с вами в течение одного рабочего дня.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div>
+          <form id="leadForm" action="#">
+            <div class="fields">
+              <div class="field">
+                <label for="fOrg">Организация *</label>
+                <input type="text" id="fOrg" autocomplete="organization" placeholder="Название компании" required>
+              </div>
+              <div class="field">
+                <label for="fName">Контактное лицо *</label>
+                <input type="text" id="fName" autocomplete="name" placeholder="Имя, должность" required>
+              </div>
+              <div class="field">
+                <label for="fPhone">Телефон *</label>
+                <input type="tel" id="fPhone" autocomplete="tel" placeholder="+998 __ ___ __ __" required>
+              </div>
+              <div class="field">
+                <label for="fEmail">Email</label>
+                <input type="email" id="fEmail" autocomplete="email" placeholder="name@company.uz">
+              </div>
+              <div class="field full">
+                <label for="fService">Услуга *</label>
+                <select id="fService" required>
+                  <option value="0">Проектирование и согласование ОДН</option>
+                  <option value="1">Установка и монтаж опор ОДН под ключ</option>
+                  <option value="2">Монтаж телеком-оборудования и юстировка</option>
+                  <option value="3">Обслуживание и круглосуточная эксплуатация 24/7</option>
+                </select>
+              </div>
+              <div class="field full">
+                <label for="fComment">Комментарий</label>
+                <textarea id="fComment" placeholder="Координаты, высота, состав оборудования"></textarea>
+              </div>
+            </div>
+            <label class="consent">
+              <input type="checkbox" id="fConsent" required>
+              <span>Согласен на обработку персональных данных для связи по проекту *</span>
+            </label>
+            <div class="form-actions">
+              <button class="btn" type="submit">Отправить заявку</button>
+              <span class="ash">Ответ в течение рабочего дня</span>
+            </div>
+          </form>
+
+          <div class="success" id="successPanel" role="status">
+            <h3 class="h3">Заявка сформирована.</h3>
+            <p>Инженерная служба Burji Aloqa приняла запрос. Вы также можете отправить сформированный текст напрямую в мессенджер.</p>
+            <div class="success-actions">
+              <a class="btn" id="tgSend" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+              <a class="btn btn--ghost" id="waSend" href="#" target="_blank" rel="noopener">Отправить в WhatsApp</a>
+              <button type="button" class="btn btn--ghost" id="resetBtn">Ещё одна заявка</button>
+            </div>
+          </div>
+        </div>
+
+        <dl class="info">
+          <div><dt>Телефон</dt><dd><a href="tel:+998712000000">+998 (71) 200-00-00</a><small>Приём звонков: 09:00 — 18:00 (пн–пт)</small></dd></div>
+          <div><dt>Email</dt><dd><a href="mailto:info@burjialoqa.uz">info@burjialoqa.uz</a></dd></div>
+          <div><dt>Мессенджеры</dt><dd class="chips"><a class="btn btn--ghost" href="https://t.me/burjialoqa_uz" target="_blank" rel="noopener">Telegram</a><a class="btn btn--ghost" href="https://wa.me/998712000000" target="_blank" rel="noopener">WhatsApp</a></dd></div>
+          <div><dt>Адрес</dt><dd>г. Ташкент, ул. Инженерная, 12</dd></div>
+          <div><dt>Аварийная диспетчерская</dt><dd>Круглосуточно, 24/7/365</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ФУТЕР-ТЕРМИНАЛ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-word" aria-hidden="true">Burji Aloqa<sup>®</sup></div>
+    <div class="foot-grid">
+      <div>
+        <h4>Услуги</h4>
+        <a href="#services">Проектирование и согласование</a>
+        <a href="#services">Установка опор ОДН</a>
+        <a href="#services">Телеком-монтаж 4G/5G</a>
+        <a href="#services">Обслуживание и ТО</a>
+      </div>
+      <div>
+        <h4>Компания</h4>
+        <a href="#about">О нас</a>
+        <a href="#odn">Опора ОДН</a>
+        <a href="#process">Процесс</a>
+        <a href="#targets">Для кого</a>
+        <a href="#faq">Вопросы</a>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <a href="tel:+998712000000">+998 (71) 200-00-00</a>
+        <a href="mailto:info@burjialoqa.uz">info@burjialoqa.uz</a>
+        <a href="#contacts">г. Ташкент</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Burji Aloqa 2026. Опоры двойного назначения.</span>
+      <a href="#top" style="color:inherit;text-decoration:none">Наверх ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var TG='burjialoqa_uz', WA='998712000000';
+  var ODN=[
+    {code:'01 · Антенны',title:'Секторные антенны сотовой связи (3G / 4G / 5G)',desc:'Панельные секторные антенны мобильных операторов с регулируемым углом наклона луча (Tilt). Размещение оборудования до 4 операторов на разных высотных ярусах.',p:['700–3800 МГц (LTE / 5G NR)','3–6 секторов (360° охват)','До 4 операторов связи','до 36 м/с (СНиП регион III–IV)']},
+    {code:'02 · Радиоблоки RRU',title:'Выносные радиоблоки RRU и коммутация',desc:'Радиомодули вынесены непосредственно к антеннам для снижения потерь мощности. Пассивное радиаторное охлаждение и оптические кроссы CPRI/eCPRI.',p:['Выходная мощность 4x40W / 4x80W','Оптический интерфейс eCPRI','Степень защиты корпуса IP67','Пассивное охлаждение без шума']},
+    {code:'03 · Видеонаблюдение',title:'PTZ-камера безопасного города 360°',desc:'Камера кругового обзора с видеоаналитикой и интеграцией в единый городской диспетчерский центр.',p:['Разрешение 4K Ultra HD','ИК-подсветка до 150 метров','Круговой поворот на 360°','Питание по защищённой линии']},
+    {code:'04 · Светильник LED',title:'Энергоэффективное освещение проспекта',desc:'Уличный светодиодный светильник на усиленном выносном кронштейне с равномерной засветкой дорожного полотна.',p:['Мощность 150–250 Вт','Световой поток до 32 000 лм','Цветовая температура 4000K','Управление яркостью по DALI']},
+    {code:'05 · Кабель-канал',title:'Скрытая кабельная канализация',desc:'Все оптические линии и силовые фидеры проложены внутри полого гранёного ствола, исключая обрывы и вандализм.',p:['Внутренний диаметр от 240 мм','Раздельные кабельные каналы','Антивандальный защищённый ввод','Огнестойкие кабели с низким дымовыделением']},
+    {code:'06 · Фундамент',title:'Анкерный монолитный фундамент',desc:'Железобетонный монолит с закладной анкерной корзиной, рассчитанный на предельные ветровые моменты.',p:['Бетон класса В25 (М350)','Анкерные шпильки М36–М42','Контур заземления R < 4 Ом','Питание 380В / 220В I категории']}
+  ];
+  var $=function(id){return document.getElementById(id)};
+
+  var header=$('siteNav');
+  function onScroll(){header.classList.toggle('scrolled',window.scrollY>40)}
+  onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
+
+  document.querySelectorAll('.menu a').forEach(function(a){
+    a.addEventListener('click',function(){a.closest('details').open=false});
+  });
+
+  var tabs=document.querySelectorAll('.tab');
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){
+      var d=ODN[+t.dataset.odn]; if(!d) return;
+      tabs.forEach(function(x){x.setAttribute('aria-pressed',x===t?'true':'false')});
+      $('odnTabCode').textContent=d.code; $('odnTabTitle').textContent=d.title; $('odnTabDesc').textContent=d.desc;
+      d.p.forEach(function(v,i){$('odnTabP'+(i+1)).textContent=v});
+    });
+  });
+
+  document.querySelectorAll('[data-srv]').forEach(function(a){
+    a.addEventListener('click',function(){$('fService').value=a.dataset.srv});
+  });
+  var TGT={operator:'Запрос для оператора связи: требуются условия размещения БС.',
+           municipality:'Запрос для муниципалитета: модернизация опор освещения.',
+           developer:'Запрос для девелопера: обеспечение покрытия связью ЖК.'};
+  document.querySelectorAll('[data-tgt]').forEach(function(a){
+    a.addEventListener('click',function(){$('fComment').value=TGT[a.dataset.tgt]||''});
+  });
+
+  var form=$('leadForm'), ok=$('successPanel');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var s=$('fService'), v=function(id){return $(id).value.trim()};
+    var msg='Заявка на расчёт ОДН:\nОрганизация: '+v('fOrg')+'\nКонтакт: '+v('fName')+'\nТелефон: '+v('fPhone')+
+      '\nEmail: '+(v('fEmail')||'—')+'\nУслуга: '+s.options[s.selectedIndex].text+'\nКомментарий: '+(v('fComment')||'—');
+    $('tgSend').href='https://t.me/'+TG+'?text='+encodeURIComponent(msg);
+    $('waSend').href='https://wa.me/'+WA+'?text='+encodeURIComponent(msg);
+    form.style.display='none'; ok.classList.add('shown');
+  });
+  $('resetBtn').addEventListener('click',function(){
+    form.reset(); form.style.display=''; ok.classList.remove('shown');
+  });
+
+  var items=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
+    },{threshold:0.05});
+    items.forEach(function(el){io.observe(el)});
+  }else{items.forEach(function(el){el.classList.add('in')})}
+})();
+</script>
+</body>
+</html>
