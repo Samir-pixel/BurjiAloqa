@@ -691,10 +691,11 @@ select option{background:var(--hull);color:var(--white)}
           </form>
 
           <div class="success" id="successPanel" role="status">
-            <h3 class="h3">Заявка сформирована.</h3>
-            <p>Инженерная служба Burji Aloqa приняла запрос. Вы также можете отправить сформированный текст напрямую в мессенджер.</p>
+            <h3 class="h3" id="successTitle">Заявка отправлена.</h3>
+            <p id="successText">Инженерная служба Burji Aloqa получила запрос.</p>
             <div class="success-actions">
-              <a class="btn" id="tgSend" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
+              <a class="btn" id="mailSend" href="#">Открыть в почте</a>
+              <a class="btn btn--ghost" id="tgSend" href="#" target="_blank" rel="noopener">Отправить в Telegram</a>
               <a class="btn btn--ghost" id="waSend" href="#" target="_blank" rel="noopener">Отправить в WhatsApp</a>
               <button type="button" class="btn btn--ghost" id="resetBtn">Ещё одна заявка</button>
             </div>
@@ -702,7 +703,8 @@ select option{background:var(--hull);color:var(--white)}
         </div>
 
         <dl class="info">
-          <div><dt>Email</dt><dd><a href="mailto:info@burjialoqa.tj">info@burjialoqa.tj</a></dd></div>
+          <div><dt>Email</dt><dd><a id="contactMail" href="mailto:info@burjialoqa.tj">info@burjialoqa.tj</a></dd></div>
+          <div><dt>Адрес</dt><dd>г. Душанбе</dd></div>
           <div><dt>Аварийная диспетчерская</dt><dd>Круглосуточно, 24/7/365</dd></div>
         </dl>
       </div>
@@ -733,7 +735,8 @@ select option{background:var(--hull);color:var(--white)}
       </div>
       <div>
         <h4>Контакты</h4>
-        <a href="mailto:info@burjialoqa.tj">info@burjialoqa.tj</a>
+        <a data-bind-mail href="mailto:info@burjialoqa.tj">info@burjialoqa.tj</a>
+        <a href="#contacts">г. Душанбе</a>
       </div>
     </div>
     <div class="foot-bottom">
@@ -787,18 +790,83 @@ select option{background:var(--hull);color:var(--white)}
     a.addEventListener('click',function(){$('fComment').value=TGT[a.dataset.tgt]||''});
   });
 
+  function contactEmail(){
+    var a=$('contactMail');
+    if(!a) return '';
+    var href=a.getAttribute('href')||'';
+    var addr=href.replace(/^mailto:/i,'').split('?')[0].trim();
+    return addr||a.textContent.trim();
+  }
+  function bindMail(addr){
+    document.querySelectorAll('[data-bind-mail]').forEach(function(el){
+      el.href='mailto:'+addr;
+      el.textContent=addr;
+    });
+    var ld=document.querySelector('script[type="application/ld+json"]');
+    if(!ld) return;
+    try{
+      var data=JSON.parse(ld.textContent);
+      if(data.contactPoint) data.contactPoint.email=addr;
+      ld.textContent=JSON.stringify(data);
+    }catch(err){}
+  }
+  bindMail(contactEmail());
+
   var form=$('leadForm'), ok=$('successPanel');
   form.addEventListener('submit',function(e){
     e.preventDefault();
+    var MAIL=contactEmail();
+    if(!MAIL) return;
     var s=$('fService'), v=function(id){return $(id).value.trim()};
+    var service=s.options[s.selectedIndex].text;
     var msg='Заявка на расчёт ОДН:\nОрганизация: '+v('fOrg')+'\nКонтакт: '+v('fName')+'\nТелефон: '+v('fPhone')+
-      '\nEmail: '+(v('fEmail')||'—')+'\nУслуга: '+s.options[s.selectedIndex].text+'\nКомментарий: '+(v('fComment')||'—');
+      '\nEmail: '+(v('fEmail')||'—')+'\nУслуга: '+service+'\nКомментарий: '+(v('fComment')||'—');
+    var mailto='mailto:'+MAIL+'?subject='+encodeURIComponent('Заявка на расчёт ОДН — '+v('fOrg'))+'&body='+encodeURIComponent(msg);
+    $('mailSend').href=mailto;
     $('tgSend').href='https://t.me/'+TG+'?text='+encodeURIComponent(msg);
     $('waSend').href='https://wa.me/'+WA+'?text='+encodeURIComponent(msg);
-    form.style.display='none'; ok.classList.add('shown');
+    var btn=form.querySelector('button[type="submit"]');
+    btn.disabled=true;
+    var payload={
+      _subject:'Заявка на расчёт ОДН — '+v('fOrg'),
+      _template:'table',
+      _captcha:'false',
+      Организация:v('fOrg'),
+      'Контактное лицо':v('fName'),
+      Телефон:v('fPhone'),
+      Email:v('fEmail')||'—',
+      Услуга:service,
+      Комментарий:v('fComment')||'—'
+    };
+    if(v('fEmail')) payload._replyto=v('fEmail');
+    fetch('https://formsubmit.co/ajax/'+encodeURIComponent(MAIL),{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(payload)
+    }).then(function(r){return r.json().catch(function(){return {}}).then(function(data){return {ok:r.ok,data:data}})})
+    .then(function(res){
+      btn.disabled=false;
+      var sent=res.ok&&res.data&&(res.data.success===true||res.data.success==='true');
+      var needsAct=!sent&&res.data&&/activ/i.test(res.data.message||'');
+      $('successTitle').textContent=sent?'Заявка отправлена.':(needsAct?'Подтвердите почту.':'Письмо подготовлено.');
+      $('successText').textContent=sent
+        ?'Заявка ушла на '+MAIL+'. Инженер Burji Aloqa свяжется с вами в течение одного рабочего дня.'
+        :(needsAct
+          ?'На '+MAIL+' ушло письмо со ссылкой активации. Откройте его один раз — после этого заявки будут приходить на этот адрес сами. Эту заявку можно отправить кнопкой «Открыть в почте».'
+          :'Автоотправка пока недоступна. Нажмите «Открыть в почте» и отправьте письмо на '+MAIL+'.');
+      $('mailSend').hidden=sent;
+      form.style.display='none'; ok.classList.add('shown');
+    }).catch(function(){
+      btn.disabled=false;
+      $('successTitle').textContent='Письмо подготовлено.';
+      $('successText').textContent='Автоотправка пока недоступна. Нажмите «Открыть в почте» и отправьте письмо на '+MAIL+'.';
+      $('mailSend').hidden=false;
+      form.style.display='none'; ok.classList.add('shown');
+    });
   });
   $('resetBtn').addEventListener('click',function(){
     form.reset(); form.style.display=''; ok.classList.remove('shown');
+    $('mailSend').hidden=false;
   });
 
   var items=document.querySelectorAll('.reveal');
